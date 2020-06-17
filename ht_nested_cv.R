@@ -6,9 +6,9 @@ library(caret)
 library(MLmetrics)
 
 nested_cv = function(cv_k1 = 10, cv_k2 = 10, seed = 1, 
-			best_perf_method = 'mean',  perf_type = 'low', 
-		        grid = NULL,  inner_perf_f = NULL, outer_perf_f, 
-		        score_f, model, dat, response) {
+			               best_perf_method = 'mean',  perf_type = 'low', 
+		                 grid = NULL,  inner_perf_f = NULL, outer_perf_f, 
+		                 score_f, model, dat, response) {
 	#' Performs a nested cross-validation to determine performance
 	#' with a grid-search of parameters. Generalized to work
 	#' for either regression or classification on any performance metric.
