@@ -1,3 +1,7 @@
+# Benjamin H Pepper
+# B.H.Pepper@gmail.com
+# https://www.linkedin.com/in/benjamin-pepper-62936714b/
+
 library(data.table)
 library(bnstruct)
 library(glmnet)
@@ -75,7 +79,6 @@ lasso_score = function(mod, dat, response) {
 }
 
 lasso_outer_perf = function(mod, dat, response) {
-  
   preds = lasso_score(mod, dat, response)
   preds = ifelse(preds > .5, 'YES', 'NO')
   perf = Accuracy(dat[,response], preds)
@@ -84,14 +87,12 @@ lasso_outer_perf = function(mod, dat, response) {
 }
 
 lasso_inner_perf = function(mod, dat, response) {
-
   perf = lasso_inner_perf(mod, dat, response)
   
   return(perf)
 }
 
 lr_mod = function(dat, response, params) {
-  
   f = as.formula(paste0(response, ' ~ .'))
   mod = glm(f, dat, family='binomial')
   
@@ -99,14 +100,12 @@ lr_mod = function(dat, response, params) {
 }
 
 lr_score = function(mod, dat, response) {
-  
   preds = predict(mod, dat, type = 'response')
   
   return(preds)
 }
 
 lr_outer_perf = function(mod, dat, response) {
-  
   preds = lr_score(mod, dat, response)
   preds = ifelse(preds > .5, 'YES', 'NO')
   perf = Accuracy(dat[,response], preds)
@@ -115,7 +114,6 @@ lr_outer_perf = function(mod, dat, response) {
 }
 
 integrated_mod = function(dat, response, params) {
-  
   mod1 = lasso_mod(dat[[1]], response, params)
   dat_integrated = dat[[2]]
   dat_integrated$GENOMIC_SCORE = lasso_score(mod1, dat[[1]], response)[,1]
@@ -126,7 +124,6 @@ integrated_mod = function(dat, response, params) {
 }
 
 integrated_score = function(mod, dat, response) {
-  
   dat_integrated = dat[[2]]
   dat_integrated$GENOMIC_SCORE = lasso_score(mod$mod1, dat[[1]], response)[,1]
   preds = predict(mod$mod2, dat_integrated, type='response')
@@ -135,7 +132,6 @@ integrated_score = function(mod, dat, response) {
 }
 
 integrated_outer_perf = function(mod, dat, response) {
-
   preds = integrated_score(mod, dat, response)
   preds = ifelse(preds > .5, 'YES', 'NO')
   perf = Accuracy(dat[[2]][,response], preds)
@@ -144,7 +140,6 @@ integrated_outer_perf = function(mod, dat, response) {
 }
 
 integrated_inner_perf = function(mod, dat, response) {
-  
   perf = integrated_outer_perf(mod, dat, response)
   
   return(perf)
