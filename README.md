@@ -18,7 +18,6 @@ root = "..\\Data\\brca_metabric"
 The BRCA Metabric genomic data set from cBioPortal for Cancer Genomics was used to obtain genomic and clinical data of breast cancer patients from "data_expression_median.txt", "data_clinical_patient.txt", and "data_clinical_sample.txt" files (https://www.cbioportal.org/study/summary?id=brca_metabric).
 
 Direct Download Link of Data: http://download.cbioportal.org/brca_metabric.tar.gz
-(Recommend 7-zip for extraction)
 
 The functions called below serve to clean the data for this project and their definitions can be found in "ht_functions.R" along with those of other functions written for this project.
 
