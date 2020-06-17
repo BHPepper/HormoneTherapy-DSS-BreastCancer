@@ -2,4 +2,4 @@
 
 https://www.cbioportal.org/study/summary?id=brca_metabric
 
-Download Data: http://download.cbioportal.org/brca_metabric.tar.gz
+Direct Download Link: http://download.cbioportal.org/brca_metabric.tar.gz
