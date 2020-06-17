@@ -4,18 +4,16 @@ B.H.Pepper@gmail.com
 
 https://www.linkedin.com/in/benjamin-pepper-62936714b/
 
-# Hormone Therapy DSS for Breast Cancer Patients
+# Hormone Therapy DSS for Breast Cancer
 
-The purpose of this project is to aid physicians in their decision making as to whether or not to recommend hormone therapy to breast cancer patients by providing a decission support system tool. This DSS allows physicians to input 16 clinical values and a genomic score and outputs the probability that a patient received hormone therapy treatment based upon an integrated multi-stage model trained and tested on the BRCA Metabric genomic data set from cBioPortal for Cancer Genomics.
+The purpose of this project is to aid physicians in their decision making as to whether or not to recommend hormone therapy to breast cancer patients by providing a decision support system tool. This DSS allows physicians to input 16 clinical values and a genomic score and outputs the probability that a patient received hormone therapy treatment based upon an integrated multi-stage model trained and tested on the BRCA Metabric genomic data set from cBioPortal for Cancer Genomics.
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 library(tidyverse)
 library(fastDummies)
-
 source("ht_functions.R")
 source("ht_nested_cv.R")
-
 root = "..\\Data\\brca_metabric"
 ```
 
@@ -26,13 +24,12 @@ The BRCA Metabric genomic data set from cBioPortal for Cancer Genomics was used 
 Direct Download Link of Data: http://download.cbioportal.org/brca_metabric.tar.gz
 (Recommend 7-zip for extraction)
 
-The functions called below serve to clean the data for this project and their definitions can be found in "ht_functions.R" along with those of other functions written for this project.
+The functions called below serve to clean the data for this project and their definitions can be found in "ht_functions.R" along with those of other functions written for this project.The fread() function was used in reading in the data for its superior performance when working with Big Data sets. This is owed to its lazy execution which avoids storing the entire Big Data set in memory, only the parts necessary for the requested operations.
 
 ```{r}
 express = get_ht_express_dat(root)
 express$y = as.factor(express$'HORMONE_THERAPY')
 express = express[,!colnames(express) %in% 'HORMONE_THERAPY']
-
 clin = get_ht_clin_dat(root)
 ```
 
@@ -49,29 +46,26 @@ clin_reduced = na.omit(clin[,!colnames(clin) %in% var_remove])
 clin_rownames = rownames(clin_reduced)
 clin_dummies = dummy_cols(clin_reduced, remove_selected_columns = T, remove_first_dummy=T)
 rownames(clin_dummies) = clin_rownames
-
 common = intersect(rownames(clin_dummies), rownames(express))
 clin = clin_dummies[common,]
 express = express[common,]
 clin$y = express$y
-
 dat = list(express, clin)
 ```
 
 ## Data Integration:
 
-Multi-stage analysis data integration was performed by training a model on the genomic data set, integrating the results with the clinical daset, and then training a model on the integrated dataset. For the first stage, a lasso penalized regression model was trained on the genomic expression levels of 24,368 genes/features from the Breast Cancer BRCA Metabric genomic data set. The prediction scores were then taken for each observation as a new variable "GENOMIC_SCORE" that was integrated into the dummified clinical data set. For the second stage, a logistic regression was performed on the integrated data set and the prediction scores were interpreted as the probability of a patient receiving hormone therapy. 1900 multi-stage models were trained and tested on subsets of the data after accounting for the 10 nested folds within each of the 10 outer cross-validation folds and 19 different values for lambda. The final model was constructed from the whole data set with the lambda hyperparameter value yielding the highest performance. With 17 input features, the model is suitable for use in decision support systems containing the 16 clinical values + a genomic score for physicians to enter when considering whether or not to recommend hormone therapy to breast cancer patients.
+Multi-stage analysis data integration was performed by training a model on the genomic data set, integrating the results with the clinical daset, and then training a model on the integrated dataset. For the first stage, a lasso penalized regression model was trained on the genomic expression levels of 24,368 genes/features from the Breast Cancer BRCA Metabric genomic data set. The prediction scores were then taken for each observation as a new variable "GENOMIC_SCORE" that was integrated into the dummified clinical data set. For the second stage, a logistic regression was performed on the integrated data set and the prediction scores were interpreted as the probability of a patient receiving hormone therapy. 1900 multi-stage models were trained and tested on subsets of the data after accounting for the 10 nested folds within each of the 10 outer cross-validation folds and 19 different values for lambda. The final model was constructed from the whole data set with the lambda hyperparameter value yielding the highest performance. With 17 features for physicians to input, the model is suitable for use in decision support systems for determining whether or not a breast cancer patient would be a good candidate for hormone therapy.
 
 ```{r}
 integrated_grid = data.frame(lambda = seq(0.000001, 1, by = 0.05))
 res_integrated = nested_cv(cv_k1 = 10, cv_k2 = 10, seed = 1, model = integrated_mod,
-									inner_perf_f = integrated_inner_perf, 
-									outer_perf_f = integrated_outer_perf,
-									score_f = integrated_score, perf_type = 'high',
-									grid = integrated_grid, dat = dat, response = 'y')
+                 inner_perf_f = integrated_inner_perf, 
+                 outer_perf_f = integrated_outer_perf,
+                 score_f = integrated_score, perf_type = 'high',
+                 grid = integrated_grid, dat = dat, response = 'y')
 res_integrated$Performance
 mean(res_integrated$Performance$Perf)
-
 best_integrated_params = mean(integrated_grid[res_integrated$Performance$BestParams,])
 mod_integrated = integrated_mod(dat, response = 'y', best_integrated_params)
 clin_reduced$GENOMIC_SCORE = lasso_score(mod_integrated$mod1, express, response = 'y')[,1]
