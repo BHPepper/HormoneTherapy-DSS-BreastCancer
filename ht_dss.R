@@ -34,7 +34,7 @@ get_labels = function() {
 
 prob_f = function(mod, prototype, dat) {
   prototype_dummy = dummy_cols(rbind(prototype,dat), remove_selected_columns = T,
-                            remove_first_dummy=T)[1,]
+                    remove_first_dummy=T)[1,]
   preds = predict(mod$mod2, prototype_dummy, type='response')
   
   return(preds)
@@ -101,8 +101,7 @@ ui = fluidPage(
       h3(textOutput('results'),
         br(),
         plotOutput(outputId = "ROCPlot"))
-    )
-    
+    )  
   )
 )
 
