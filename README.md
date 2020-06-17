@@ -90,7 +90,7 @@ mod = readRDS('integrated_mod.RDS')
 integrated_results = read.csv("integrated_results.csv")
 ```
 
-The resulting multi-stage model yields an average accuracy of `r 100*round(mean(integrated_results$Perf), 3)`% across the 10-folds and was trained with a lambda value of `r mod$mod1$lambda`. The accuracy for each of the individual 10-folds can be seen below:
+The resulting multi-stage model yields an average accuracy of 77.8% across the 10-folds and was trained with a lambda value of 0.130001. The accuracy for each of the individual 10-folds can be seen below:
 
 ```{r, eval= TRUE}
 integrated_results
