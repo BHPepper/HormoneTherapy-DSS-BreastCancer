@@ -1,16 +1,3 @@
-# HormoneTherapy-DSS-BreastCancer
-
-https://www.cbioportal.org/study/summary?id=brca_metabric
-
-Direct Download Link of Data: http://download.cbioportal.org/brca_metabric.tar.gz
-
----
-title: "Hormone Therapy DSS for Breast Cancer Patients"
-author: "Benjamin Pepper"
-date: "June 16, 2020"
-output: pdf_document
----
-
 # Hormone Therapy DSS for Breast Cancer Patients
 
 The purpose of this project is to aide physicians in their decision making as to whether or not to recommend hormone therapy to breast cancer patients by creating a decission support system tool. The DSS allows physicians to input 16 clinical values and a genomic score and outputs the probability that a patient received hormone therapy treatment based upon an integrated multi-stage model trained and teseted on the BRCA Metabric genomic data set from cBioPortal for Cancer Genomics.
