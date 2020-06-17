@@ -1,11 +1,11 @@
 ---
-title: "Hormone Therapy DSS for Breast Cancer Patients"
+title: "Hormone Therapy DSS for Breast Cancer"
 author: "Benjamin Pepper"
 date: "June 16, 2020"
 output: pdf_document
 ---
 
-# Hormone Therapy DSS for Breast Cancer Patients
+# Hormone Therapy DSS for Breast Cancer
 
 The purpose of this project is to aid physicians in their decision making as to whether or not to recommend hormone therapy to breast cancer patients by providing a decision support system tool. This DSS allows physicians to input 16 clinical values and a genomic score and outputs the probability that a patient received hormone therapy treatment based upon an integrated multi-stage model trained and tested on the BRCA Metabric genomic data set from cBioPortal for Cancer Genomics.
 
