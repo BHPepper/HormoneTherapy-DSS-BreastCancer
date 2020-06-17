@@ -66,10 +66,10 @@ Multi-stage analysis data integration was performed by training a model on the g
 ```{r}
 integrated_grid = data.frame(lambda = seq(0.000001, 1, by = 0.05))
 res_integrated = nested_cv(cv_k1 = 10, cv_k2 = 10, seed = 1, model = integrated_mod,
-									inner_perf_f = integrated_inner_perf, 
-									outer_perf_f = integrated_outer_perf,
-									score_f = integrated_score, perf_type = 'high',
-									grid = integrated_grid, dat = dat, response = 'y')
+                 inner_perf_f = integrated_inner_perf, 
+                 outer_perf_f = integrated_outer_perf,
+                 score_f = integrated_score, perf_type = 'high',
+                 grid = integrated_grid, dat = dat, response = 'y')
 res_integrated$Performance
 mean(res_integrated$Performance$Perf)
 
