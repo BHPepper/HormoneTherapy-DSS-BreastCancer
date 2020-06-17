@@ -1,3 +1,7 @@
+# Benjamin H Pepper
+# B.H.Pepper@gmail.com
+# https://www.linkedin.com/in/benjamin-pepper-62936714b/
+
 library(shiny)
 library(rlang)
 library(pROC)
@@ -9,23 +13,26 @@ source('ht_functions.R')
 root = 'D:\\Ben\\Documents\\KUMC\\DATA882\\Data\\brca_metabric'
 
 get_mod = function() {
+  
   return(readRDS('integrated_mod.RDS'))
 }
 
 get_dat = function() {
+  
   return(readRDS('integrated_dat.RDS'))
 }
 
 get_scores = function() {
+  
   return(readRDS('integrated_scores.RDS'))
 }
 
 get_labels = function() {
+  
   return(readRDS('integrated_labels.RDS'))
 }
 
 prob_f = function(mod, prototype, dat) {
-  
   prototype_dummy = dummy_cols(rbind(prototype,dat), remove_selected_columns = T,
                             remove_first_dummy=T)[1,]
   preds = predict(mod$mod2, prototype_dummy, type='response')
