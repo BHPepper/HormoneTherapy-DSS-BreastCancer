@@ -2,6 +2,7 @@ library(shiny)
 library(rlang)
 library(pROC)
 library(ggplot2)
+library(fastDummies)
 
 source('ht_functions.R')
 
