@@ -6,7 +6,7 @@ https://www.linkedin.com/in/benjamin-pepper-62936714b/
 
 # Hormone Therapy DSS for Breast Cancer
 
-The purpose of this project is to aid physicians in their decision making as to whether or not to recommend hormone therapy to breast cancer patients by providing a decision support system tool. This DSS allows physicians to input 16 clinical values and a genomic score and outputs the probability that a patient received hormone therapy treatment based upon an integrated multi-stage model trained and tested on the BRCA Metabric genomic data set from cBioPortal for Cancer Genomics.
+The purpose of this project is to aid physicians in deciding whether or not to recommend hormone therapy to breast cancer patients by providing a decision support system. This DSS allows physicians to input 16 clinical values and a genomic score and outputs the probability that a patient received hormone therapy treatment based upon an integrated multi-stage model trained and tested on the BRCA Metabric genomic data set from cBioPortal for Cancer Genomics.
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
