@@ -1,6 +1,6 @@
 Benjamin H Pepper
 
-B.H.Pepper@gmail.com
+BHPepper@gmail.com
 
 https://www.linkedin.com/in/benjamin-pepper-62936714b/
 
