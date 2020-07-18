@@ -2,7 +2,7 @@ Benjamin H Pepper
 
 BHPepper@gmail.com
 
-https://www.linkedin.com/in/benjamin-pepper-62936714b/
+linkedin.com/in/BHPepper
 
 # Hormone Therapy DSS for Breast Cancer
 
