@@ -8,10 +8,6 @@ library(pROC)
 library(ggplot2)
 library(fastDummies)
 
-source('ht_functions.R')
-
-root = 'D:\\Ben\\Documents\\KUMC\\DATA882\\Data\\brca_metabric'
-
 get_mod = function() {
   
   return(readRDS('integrated_mod.RDS'))
