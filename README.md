@@ -1,4 +1,4 @@
-## Interactive Demonstration of the DSS Shiny App at [bhpepper.shinyapps.io/htDSS/](https://bhpepper.shinyapps.io/htDSS/)
+## Interactive Demonstration of the DSS Shiny App at [bhpepper.shinyapps.io/htDSS](https://bhpepper.shinyapps.io/htDSS/)
 
 Benjamin H Pepper
 
@@ -74,7 +74,7 @@ clin_reduced$GENOMIC_SCORE = lasso_score(mod_integrated$mod1, express, response 
 clin_reduced <- clin_reduced %>% select(GENOMIC_SCORE, everything())
 ```
 
-## Running the DSS Shiny App seen at [bhpepper.shinyapps.io/htDSS/](https://bhpepper.shinyapps.io/htDSS/) locally:
+## Running the DSS Shiny App seen at [bhpepper.shinyapps.io/htDSS](https://bhpepper.shinyapps.io/htDSS/) locally:
 
 To run the DSS locally, open "ht_dss.R" in RStudio and click the green arrow and text "Run App" in the top right corner. Be sure to have the .RDS files in the same folder that were saved with the below code:
 
