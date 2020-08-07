@@ -1,4 +1,4 @@
-# Interactive Demonstration of the DSS Shiny App at bhpepper.shinyapps.io/htDSS/
+## Interactive Demonstration of the DSS Shiny App at [bhpepper.shinyapps.io/htDSS/](https://bhpepper.shinyapps.io/htDSS/)
 
 Benjamin H Pepper
 
