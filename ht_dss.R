@@ -1,6 +1,6 @@
 # Benjamin H Pepper
-# BHPepper@gmail.com
-# linkedin.com/in/BHPepper
+# B.H.Pepper@gmail.com
+# https://www.linkedin.com/in/benjamin-pepper-62936714b/
 
 library(shiny)
 library(rlang)
@@ -90,7 +90,7 @@ for(i in 1:length(types)) {
 
 ui = fluidPage(
   titlePanel("Hormone Therapy Decision Support Tool"),
-  
+  uiOutput("tab"),
   sidebarLayout(
     exec('sidebarPanel', !!!widgets),
     mainPanel(
@@ -102,6 +102,11 @@ ui = fluidPage(
 )
 
 server = function(input, output) {
+  url <- a("github.com/BHPepper/HormoneTherapy-DSS-BreastCancer", href="https://github.com/BHPepper/HormoneTherapy-DSS-BreastCancer")
+  output$tab <- renderUI({
+    tagList("GitHub link:", url)
+  })
+  
   output$ROCPlot = renderPlot({
     roc_obj = roc(labels, scores)
     ggroc(roc_obj) + theme_minimal() + labs(title = paste0('ROC Curve for the Model - AUC: ',
