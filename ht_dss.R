@@ -30,7 +30,7 @@ get_labels = function() {
 
 prob_f = function(mod, prototype, dat) {
   prototype_dummy = dummy_cols(rbind(prototype,dat), remove_selected_columns = T,
-                    remove_first_dummy=T)[1,]
+                               remove_first_dummy=T)[1,]
   preds = predict(mod$mod2, prototype_dummy, type='response')
   
   return(preds)
@@ -90,21 +90,26 @@ for(i in 1:length(types)) {
 
 ui = fluidPage(
   titlePanel("Hormone Therapy Decision Support Tool"),
+  uiOutput("name"),
   uiOutput("tab"),
   sidebarLayout(
     exec('sidebarPanel', !!!widgets),
     mainPanel(
       h3(textOutput('results'),
-        br(),
-        plotOutput(outputId = "ROCPlot"))
+         br(),
+         plotOutput(outputId = "ROCPlot"))
     )  
   )
 )
 
 server = function(input, output) {
+  output$name <- renderUI({
+    tagList("By Benjamin H Pepper")
+  })
+  
   url <- a("github.com/BHPepper/HormoneTherapy-DSS-BreastCancer", href="https://github.com/BHPepper/HormoneTherapy-DSS-BreastCancer")
   output$tab <- renderUI({
-    tagList("GitHub link:", url)
+    tagList("View code on GitHub:", url)
   })
   
   output$ROCPlot = renderPlot({
@@ -117,7 +122,7 @@ server = function(input, output) {
     for(i in 1:length(types)) {
       prototype[,names[i]] = input[[names[i]]]
     }
-
+    
     probability = prob_f(mod, prototype, dat)
     paste0('Predicted Probability of Hormone Therapy: ', round(probability, 3))
   })
